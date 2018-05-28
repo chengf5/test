@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery-1.12.4.min.js"></script>
+    <script>
+$(function () {
+
+
+
+        $.get('/prov',function(data) {
+
+            res=data.data
+{#            console.log(data.data)#}
+            prov=$('#prov')
+
+{#            {% for x in data %}#}
+{#            #}
+{#            {% endfor %}#}
+
+            $.each(res,function(index,item) {
+
+                id=item[0]
+{#                console.log(id)#}
+                abittle=item[1]
+                option_str='<option value="'+id+'">'+abittle+'</option>'
+                prov.append(option_str)
+            })
+        })
+
+
+        $('#prov').change(function () {
+            city_id=$(this).val()
+            city=$('#city')
+            city.empty().append('<option >---请选择市---</option>')
+            $.get('/city'+city_id,function (data) {
+
+
+            $.each(res,function(index,item) {
+
+                id=item[0]
+{#                console.log(id)#}
+                abittle=item[1]
+                console.log(abittle)
+                option_str='<option value="'+id+'">'+abittle+'</option>'
+                city.append(option_str)
+            })
+        })
+
+            })
+
+
+
+
+        })
+
+
+
+    </script>
+
+</head>
+<body>
+
+<select id="prov">
+    <option >---请选择省---</option>
+</select>
+<select id="city">
+    <option >---请选择市---</option>
+</select>
+<select  id="dis">
+    <option>---请选择区---</option>
+</select>
+
+
+</body>
+</html>
